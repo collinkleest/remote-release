@@ -1,0 +1,28 @@
+# .github/workflows/ci.yaml
+
+name: Test Release Action
+
+on:
+    push:
+      branches:
+        - master
+
+
+jobs:
+    test-release:
+        runs-on: ubuntu
+        steps:
+            - name: Checkout repo
+              uses: actions/checkout@v4
+
+            - name: Run release action
+              uses: ./
+              with:
+                host: ${{ secrets.HOST }}
+                port: ${{ secrets.PORT }}
+                username: ${{ secrets.USERNAME }}
+                password: ${{ secrets.PASSWORD }}
+                command: |
+                    docker compose down
+                    docker compose up -d
+                    docker compose down
