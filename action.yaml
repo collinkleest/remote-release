@@ -1,27 +1,27 @@
-name: 'Remote Release Action'
+name: "Remote Release Action"
 
-description: 'Custom remote release action to deploy code onto a remote server via ssh'
+description: "Custom remote release action to deploy code onto a remote server via ssh"
 
 inputs:
   host:
-    description: 'Hostname or IP address of remote server (i.e. 192.168.1.1 or example.com)'
+    description: "Hostname or IP address of remote server (i.e. 192.168.1.1 or example.com)"
     required: true
   port:
-    description: 'Port number of ssh server running on remote server (defaults to 22)'
-    default: '22'
+    description: "Port number of ssh server running on remote server (defaults to 22)"
+    default: "22"
     required: false
   username:
-    description: 'Username to log in under for ssh on the remote server'
+    description: "Username to log in under for ssh on the remote server"
     required: true
   password:
-    description: 'Password to log into the ssh server on the remote server'
+    description: "Password to log into the ssh server on the remote server"
     required: true
   target-directory:
-    description: 'Target directory where you want the deployed code to go'
+    description: "Target directory where you want the deployed code to go"
     required: false
-    default: '~/github'
+    default: "~/github"
   command:
-    description: 'Release command to run in the context of the repo'
+    description: "Release command to run in the context of the repo"
     required: false
     default: |
       docker compose down
@@ -29,13 +29,13 @@ inputs:
 
 outputs:
   my-output:
-    description: 'Output of my custom action'
+    description: "Output of my custom action"
     value: string
 
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
-    - name: 'Deploy Code'
+    - name: "Deploy Code"
       uses: appleboy/ssh-action@v1.0.3
       with:
         host: ${{ inputs.host }}
@@ -46,6 +46,8 @@ runs:
           mkdir -p ${{ inputs.target-directory }} && cd ${{ inputs.target-directory }}
           git clone "$(echo ${{ github.repositoryUrl }} | sed 's/git:\/\//https:\/\//')"
           repo_name=$(echo "${{ github.repository }}" | cut -d'/' -f2)
+          ls -lsa
+          echo ${repo_name}
           cd "${{ inputs.target-directory }}/${repo_name}"
           git pull
           ${{ inputs.command }}
