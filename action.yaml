@@ -27,11 +27,6 @@ inputs:
       docker compose down
       docker compose up -d
 
-outputs:
-  my-output:
-    description: "Output of my custom action"
-    value: string
-
 runs:
   using: "composite"
   steps:
