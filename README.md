@@ -26,3 +26,6 @@ Action for running a remote release
     # optional (defaults to docker compose down && docker compose up -d)
     command: ''
 ```
+
+### For releasing (internal use)
+See [RELEASE.md](./RELEASE.md)
