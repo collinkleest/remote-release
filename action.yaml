@@ -31,7 +31,7 @@ runs:
   using: "composite"
   steps:
     - name: "Deploy Code"
-      uses: appleboy/ssh-action@v1.0.3
+      uses: appleboy/ssh-action@v1.2.0
       with:
         host: ${{ inputs.host }}
         username: ${{ inputs.username }}
