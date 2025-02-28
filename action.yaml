@@ -20,6 +20,10 @@ inputs:
     description: "Target directory where you want the deployed code to go"
     required: false
     default: "~/github"
+  command_timeout:
+    description: "Amount of time alloted until the command times out"
+    required: false
+    default: "15m"
   command:
     description: "Release command to run in the context of the repo"
     required: false
@@ -37,6 +41,7 @@ runs:
         username: ${{ inputs.username }}
         password: ${{ inputs.password }}
         port: ${{ inputs.port }}
+        command_timeout: ${{ inputs.command_timeout }}
         script: |
           mkdir -p ${{ inputs.target-directory }} && cd ${{ inputs.target-directory }}
           git clone "$(echo ${{ github.repositoryUrl }} | sed 's/git:\/\//https:\/\//')"
