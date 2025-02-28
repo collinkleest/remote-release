@@ -25,6 +25,9 @@ Action for running a remote release
     # Release command to run in the context of the repo
     # optional (defaults to docker compose down && docker compose up -d)
     command: ''
+    # Amount of time alloted until the command times out
+    # optional (defaults to 15m)
+    command_timeout: ''
 ```
 
 ### For releasing (internal use)
