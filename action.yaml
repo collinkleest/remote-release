@@ -20,10 +20,6 @@ inputs:
     description: "Target directory where you want the deployed code to go"
     required: false
     default: "~/github"
-  version:
-    description: "The desired version of the wrapped action (i.e. v1.2.2) (defaults to master)"
-    required: false
-    default: "master"
   command_timeout:
     description: "Amount of time alloted until the command times out"
     required: false
@@ -39,7 +35,7 @@ runs:
   using: "composite"
   steps:
     - name: "Deploy Code"
-      uses: appleboy/ssh-action${{ inputs.version != 'master' && format('@{0}', inputs.version) || '' }}
+      uses: appleboy/ssh-action@master
       with:
         host: ${{ inputs.host }}
         username: ${{ inputs.username }}
