@@ -39,7 +39,7 @@ runs:
   using: "composite"
   steps:
     - name: "Deploy Code"
-      uses: appleboy/ssh-action@${{ inputs.version }}
+      uses: appleboy/ssh-action${{ inputs.version != 'master' && format('@{0}', inputs.version) || '' }}
       with:
         host: ${{ inputs.host }}
         username: ${{ inputs.username }}
